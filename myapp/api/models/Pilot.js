@@ -20,8 +20,9 @@ module.exports = {
   		required: true,
   	},
 
-  	rating: 'float',
+  	rating: 'FLOAT',
   	status: 'integer',
+
   	clubs:{
   		collection : "club",
   		via: 'pilots'
