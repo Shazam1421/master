@@ -16,7 +16,8 @@ module.exports = {
   	phone:{
   		type: 'string',
   		required: true,
-  	}
+  	},
+    
   	subscriptionType:{
   		model: 'subscription'
   	},

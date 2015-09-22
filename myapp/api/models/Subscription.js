@@ -11,11 +11,10 @@ module.exports = {
   	name: 'string',
   	description: 'string',
   	price: 'float',
-  	passenger:{
+  	passengers:{
   		collection: 'passenger',
   		via: 'subscriptionType'
   	}
-
   }
 };
 
