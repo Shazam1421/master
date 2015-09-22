@@ -18,7 +18,7 @@ module.exports = {
   	phone: {
   		type: 'string',
   		required: true,
-  	}
+  	},
 
   	rating: 'float',
   	status: 'integer',
