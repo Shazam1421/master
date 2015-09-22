@@ -20,7 +20,19 @@ module.exports = {
   	pilots:{
   		collection: 'pilot',
   		via: 'events'
-  	}
+  	},
+
+    passengers: {
+      collection: 'passenger',
+      via: 'events',
+    },
+
+    clubs: {
+      collection: 'club',
+      via: 'events'
+    }
+
+
 
   }
 };
