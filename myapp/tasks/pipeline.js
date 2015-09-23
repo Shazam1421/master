@@ -28,6 +28,9 @@ var jsFilesToInject = [
 
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',
+  'js/vendor/jquery-1.11.3.min.js',
+  'js/build/ng-admin.min.js',
+  'js/build/admin.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
