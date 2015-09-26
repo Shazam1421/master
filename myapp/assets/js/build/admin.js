@@ -1,23 +1,56 @@
-var myApp = angular.module('myApp', ['ng-admin']);
+var myApp = angular.module('myApp', ['ng-admin', 'restangular']);
+
+// myApp.config(function(RestangularProvider) {
+//     RestangularProvider.addElementTransformer('user', false, function(user) {
+//                 // This will add a method called evaluate that will do a get to path evaluate with NO default
+//                 // query params and with some default header
+//                 // signature is (name, operation, path, params, headers, elementToPost)
+
+//                 user.addRestangularMethod('evaluate', 'get', 'evaluate', undefined, {'user': '1'});
+
+//                 return user;
+//     });
+
+// function ggg(Restangular){ Restangular.one('user', "1").evaluate({myParam: 'param'});   }
+//   ggg();
+
+// });
+
+
 myApp.config(['NgAdminConfigurationProvider', function (nga) {
     // create an admin application
     var admin = nga.application('Blairlines Administrator')
-      .baseApiUrl('http://localhost:1337/'); // main API endpoint
+      .baseApiUrl(location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/'); // main API endpoint
     // create a user entity
     // the API endpoint for this entity will be 'http://jsonplaceholder.typicode.com/users/:id
     var user = nga.entity('user');
     // set the fields of the user entity list view
-    user.listView().fields([
+    user.menuView().icon('<span class="glyphicon glyphicon-user"></span>');
+    user.listView().fields
+    ([
         nga.field('email'),
         nga.field('password'),
         nga.field('usertype'),
-        nga.field('createdAt'),
-        nga.field('updatedAt')
-    ]);
-    // add the user entity to the admin application
-    admin.addEntity(user)
+        nga.field('createdAt', 'date'),
+        nga.field('updatedAt', 'date')
 
+    ]);
+
+    user.listView().filters([
+        nga.field('email').label('Search').pinned(true),
+        nga.field('password'),
+        nga.field('usertype', 'number')
+    ]);
+    admin.addEntity(user);
+
+    
+
+
+    // add the user entity to the admin application
+
+    
     var pilot = nga.entity('pilot');
+    pilot.menuView().icon('<span class="glyphicon glyphicon-plane"></span>');
     pilot.listView().fields([
         nga.field('name'),
         nga.field('age'),
@@ -27,17 +60,19 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
 
 
     ]);
-    admin.addEntity(pilot)
+    admin.addEntity(pilot);
 
     var passenger = nga.entity('passenger');
+    passenger.menuView().icon('<span class="glyphicon glyphicon-copy"></span>');
     passenger.listView().fields([
         nga.field('name'),
         nga.field('age'),
         nga.field('phone'),
     ]);
-    admin.addEntity(passenger)
+    admin.addEntity(passenger);
 
     var subscription = nga.entity('subscription');
+    subscription.menuView().icon('<span class=" glyphicon glyphicon-open-file"></span>');
     subscription.listView().fields([
         nga.field('name'),
         nga.field('description'),
@@ -56,7 +91,10 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     ]);
     admin.addEntity(feedback)
 
+    
+
     var event = nga.entity('event');
+    event.menuView().icon('<span class="glyphicon glyphicon-tags"></span>');
     event.listView().fields([
         nga.field('date'),
         nga.field('time'),
@@ -68,7 +106,9 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     ]);
     admin.addEntity(event)
 
+
     var club = nga.entity('club');
+    club.menuView().icon('<span class="glyphicon glyphicon-map-marker"></span>');
     club.listView().fields([
         nga.field('name'),
         nga.field('contactperson'),
@@ -77,55 +117,25 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
 
     ]);
     admin.addEntity(club)
-    // attach the admin application to the DOM and execute it
-    nga.configure(admin);
+    //attach the admin application to the DOM and execute it
+ 
+
+   nga.configure(admin);
 }]);
 
-app.config(function(RestangularProvider, $httpProvider) {
-        RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, headers, params, httpConfig) {
-            headers = headers || {};
-            headers['Prefer'] = 'return=representation';
+// Add Restangular as a dependency to your a
 
-            if (operation === 'getList') {
-                headers['Range-Unit'] = what;
-                headers['Range'] = ((params._page - 1) * params._perPage) + '-' + (params._page * params._perPage - 1);
-                delete params._page;
-                delete params._perPage;
+// Inject Restangular into your controller
+// angular.module('myApp').controller('MainCtrl', function($scope, Restangular) {
+  
+//     Restangular.all('user');
+    
+//     var baseUser = Restangular.all('user');
 
-                if (params._sortField) {
-                    params.order = params._sortField + '.' + params._sortDir.toLowerCase();
-                    delete params._sortField;
-                    delete params._sortDir;
-                }
-            }
-        });
+//     baseUser.getList().then(function(user){
+//         console.log(user);
+//         $scope.user = user;
+//     });
 
-        RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
-            switch (operation) {
-                case 'get':
-                    return data[0];
-                case 'getList':
-                    response.totalCount = response.headers('Content-Range').split('/')[1];
-                    break;
-            }
+// });
 
-            return data;
-        });
-
-        // @see https://github.com/mgonto/restangular/issues/603
-        $httpProvider.interceptors.push(function() {
-            return {
-                request: function(config) {
-                    var pattern = /\/(\d+)$/;
-
-                    if (pattern.test(config.url)) {
-                        config.params = config.params || {};
-                        config.params['id'] = 'eq.' + pattern.exec(config.url)[1];
-                        config.url = config.url.replace(pattern, '');
-                    }
-
-                    return config;
-                },
-            };
-        });
-    });

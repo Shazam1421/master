@@ -4,7 +4,11 @@
     <title>Blairlines - DarkSociety</title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="Social platform for pilots and passengers" content="">
+    <meta name="DarkSociety" content="">
 
     
     <!--  
@@ -29,14 +33,541 @@
     -->
 
     <!--STYLES-->
+    <link rel="stylesheet" href="/styles/blairlines.css">
+    <link rel="stylesheet" href="/styles/bootstrap.css">
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.css">
+    <link rel="stylesheet" href="/styles/bootstrap/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/styles/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="/styles/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="/styles/build/ng-admin.min.css">
+    <link rel="stylesheet" href="/styles/font-awesome.css">
+    <link rel="stylesheet" href="/styles/font-awesome.min.css">
+    <link rel="stylesheet" href="/styles/fullcalendar.css">
     <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/jquery-ui.min.css">
     <!--STYLES END-->
   </head>
 
   <body>
-    <%- body %>
 
+        <div id="navbar" class="navbar navbar-default navbar-fixed-top" style="width: 100%; opacity: 0.87;">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#top"><i class="fa fa-home fa-lg"></i>&nbsp;Home</a></li>
+            <li><a href="#about"><i class="fa fa-book fa-lg"></i>&nbsp;About</a></li>
+            <li><a href="#services"><i class="fa fa-plane fa-lg"></i>&nbsp;Services</a></li>
+            <li><a href="#portfolio"><i class="fa fa-calendar fa-lg"></i>&nbsp;Events</a></li>
+            <li><a href="#contact"><i class="fa fa-phone-square fa-lg"></i>&nbsp;Contacts</a></li>
+          </ul>
+
+          <form action="/user/login" class="navbar-form navbar-right login-form">
+
+            <div class="form-group">
+           <i class="fa fa-user"></i>
+                <input type="text" class="form-control" placeholder="email"  name="email"/>
+            </div>
+       &nbsp;
+            <div class="form-group">
+      <i class="fa fa-lock"></i>
+                <input type="password" class="form-control" placeholder="password" name="password"/>
+            </div>
+            <button type="submit" class="btn btn-default">Login</button>
+          </form>
+          <div class="container user-indicator" style="text-align: right; display: none;">  
+       </br>     
+       <span class="glyphicon glyphicon-user" aria-hidden="true" style="font-size: 15px;"></span>
+       <span class="username" style="margin-left: 5px; margin-right: 13px;"></span>
+      <i class="fa fa-sign-out fa-1x" style="font-size: 20px;"></i>            
+           <a href="#" class="exit">Log out</a>
+          </div>
+        </div>
+
+
+    <!-- Header -->
+    <header id="top" class="header" style="padding-top: 85px;">
+        <div class="text-vertical-center" >
+            <h1>BlairLines</h1>
+            <h3>Fly with your Family &amp; Friends</h3>
+            <br>
+            <a href="#" class="btn btn-dark btn-lg get-started">Signup now</a>
+            <a href="#" class="btn btn-dark btn-lg create-event" style="display: none;">Create event</a>
+
+            <div class="header-forms container" style="text-align: left;">
+
+       <!-- Signup Form -->
+
+            <div class="container sign-up" style="width: 600px; display: none; background: white; opacity: 0.87; padding: 20px;">
+       
+        <!-- <h4 class="modal-title" id="myModalLabel">Signup to www.BlairLines.com</h4> -->
+                
+                  <div class="row">
+                  <div class="col-xs-6">
+                      <div class="well">
+                          <form class="signup-form" action="/user/create">
+            <p class="bg-warning"></p>
+
+                              <div class="form-group">
+                                  <label for="exampleInputEmail1" class="control-label">Email</label>
+                                  <input type="text" class="form-control" id="exampleInputEmail1" name="email" value="" required="" title="Please enter you username" placeholder="example@gmail.com">
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                  <label for="exampleInputPassword1" class="control-label">Password</label>
+                                  <input type="password" class="form-control" id="exampleInputPassword1" name="password" value="" required="" title="Please enter your password">
+                                  <span class="help-block"></span>
+                              </div>
+                              <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+                              <div class="radio">
+                              <label>
+                                <input type="radio" name="userType" id="optionsRadios1" value="1" checked>
+                                Passenger
+                              </label>
+                              </div>
+                              <div class="radio">
+                                <label>
+                                  <input type="radio" name="userType" id="optionsRadios2" value="2" >
+                                  Pilot
+                                </label>
+                              </div>
+                              <div class="radio">
+                                <label>
+                                  <input type="radio" name="userType" id="optionsRadios3" value="3" >
+                                  Club
+                                </label>
+                              </div>
+                              <div class="checkbox">
+                                  <label>
+                                      <input type="checkbox" name="remember" id="remember"> Remember login
+                                  </label>
+                                  <p class="help-block">(if this is a private computer)</p>
+                              </div>
+                              <button type="submit" class="btn btn-success btn-block">Signup</button>
+                              <!--
+           <a href="#" class="btn btn-default btn-block">Help to login</a>-->
+         
+          
+                          </form>
+                      </div>
+                  </div>
+        
+                  <div class="col-xs-6">
+                      <p class="lead">Register now for <span class="text-success">FREE</span></p>
+                      <ul class="list-unstyled" style="line-height: 2">
+                          <li><span class="fa fa-check text-success"></span> Fly around New Zealand</li>
+                          <li><span class="fa fa-check text-success"></span> Cheap & affordable flights</li>
+                          <li><span class="fa fa-check text-success"></span> Explore the wonders</li>
+                          <li><span class="fa fa-check text-success"></span> Fast booking</li>
+                          <li><span class="fa fa-check text-success"></span> Get exciting freebies <small>(only new customers)</small></li>
+                          <!-- <li><a href="#"><u>Read more</u></a></li> -->
+                      </ul>
+                      <!-- <p><a href="#" class="btn btn-info btn-block">Yes please, register now!</a></p> -->
+         <div class="event-close" style="position: absolute; z-index: 1; cursor: pointer; right: 10px; top: 0px; margin-top: -10px">
+                    <span class="glyphicon glyphicon-remove-circle" style="font-size: 20px;"></span>
+                         </div>
+
+                  </div>
+              </div>
+    
+            </div>
+       <!-- End Signup Form -->
+
+         <!-- Clubs Profile -->
+         <div class="container club-profile" style="width: 400px; display: none; background: white; opacity: 0.87; padding: 30px;">
+                    <div class="starter-template" style="padding: 40px 15px; text-align: center;">
+                    <h2>Fill your club's profile</h2>
+                </div>
+             <div class="row">
+                  <div class="col-xs-6">
+                      <div class="well" style="width: 350px;">
+                <form action="/club/create" class="profile-form">
+                    <p class="bg-warning"></p>
+                    <div class="form-group">
+                           <label for="inputName" class="control-label">Name</label>
+                          <input type="text" class="form-control" id="inputName" name="name" value="" required="" title="Please enter you name"/>
+                          <span class="help-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputContactPerson" class="control-label">Contact person</label>
+                        <input type="text" class="form-control" id="inputContactPerson" name="contactPerson" value="" required="" title="Please enter contact person"/>
+                          <span class="help-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPhone" class="control-label">Phone</label>
+                        <input type="text" class="form-control" id="inputPhone" name="phone" value="" required="" title="Please enter contact number"/>
+                          <span class="help-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputLocation" class="control-label">Location</label>
+                        <input type="text" class="form-control" id="inputLocation" name="location" value="" required="" title="Please enter contact number"/>
+                          <span class="help-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputWorkingHours" class="control-label">Working hours</label>
+                        <input type="text" class="form-control" id="inputWorkingHours" name="workingHours" value="" required="" title="Please enter clubs working hours"/>
+                          <span class="help-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription" class="control-label">Description</label>
+                        <textarea class="form-control" id="inputDescription" name="description" alue="" required="" title="Please enter clubs description"></textarea>
+                          <span class="help-block"></span>
+                    </div>
+                     <button type="submit" class="btn btn-success btn-block">Submit</button>
+                </form>
+            </div>
+            </div>
+            </div>
+                
+            </div>
+         <!-- End Clubs Profile -->
+
+            <div class="container pilot-profile" style="width: 400px; display: none; background: white; opacity: 0.87; padding: 30px;">
+
+                <div class="starter-template" style="padding: 40px 15px; text-align: center;">
+                    <h2>Fill your pilot's profile</h2>
+                </div>
+            
+                <form action="/pilot/create" class="profile-form">
+                    <p class="bg-warning"></p>
+                    <div class="form-group">
+                        <label for="inputName">Name</label>
+                        <input type="text" class="form-control" id="inputName"  name="name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAge">Age</label>
+                        <input type="text" class="form-control" id="inputAge" name="age" style="width: 50px;"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPhone">Phone</label>
+                        <input type="text" class="form-control" id="inputPhone" name="phone"/>
+                    </div>
+                     <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+       
+       <!-- Passenger Profile -->
+            <div class="container passenger-profile" style="width: 400px; display: none; background: white; opacity: 0.87; padding: 30px;">
+
+              <h4 class="modal-title" id="myModalLabel">Profile Information</h4>
+            
+                
+                          <form action="/passenger/create" novalidate="novalidate" class="profile-form">
+          <p class="bg-warning"></p>
+                              <div class="form-group">
+                                  <label for="inputName" class="control-label">Name</label>
+                                  <input type="text" class="form-control" id="inputName" name="name" value="" required="" title="Please enter you name" placeholder="yout name">
+                                  <span class="help-block"></span>
+                              </div>
+                              <div class="form-group">
+                                  <label for="inputAge" class="control-label">Age</label>
+                                  <input type="text" class="form-control" id="inputAge" name="age" style="width: 50px;"title="Please enter your age">
+                                  <span class="help-block"></span>
+                              </div>
+                <div class="form-group">
+                                  <label for="inputPhone" class="control-label">Contact</label>
+                                  <input type="text" class="form-control" id="inputPhone" name="phone" title="Please enter your contact number">
+                                  <span class="help-block"></span>
+                              </div>
+                              <button type="submit" class="btn btn-success btn-block">Submit</button>
+                          </form>
+                     
+            </div>
+       <!-- End Passenger Profile -->
+
+      
+            <div class="container event-block" style="width: 400px; display: none; background: white; opacity: 0.87; padding: 30px;">
+                
+                    <h2 style="text-align: center;">Create new event</h2>
+                
+                <form action="/event/create" class="create-event-form">
+                    <p class="bg-warning"></p>
+                    <div class="form-group">
+                        <label for="inputDate">Date</label>
+                        <input type="text" class="form-control" id="inputDate" name="date" style="width: 150px;"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTime">Time</label>
+                        <input type="text" class="form-control" id="inputTime" name="time"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescr">Event Description</label>
+                        <textarea class="form-control" id="inputDescr" name="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="eventType">
+                          <option value="1">Promo event</option>
+                          <option value="2">Intro-flight</option>
+                          <option value="3">Scenic flight</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="clubs">
+                          <!-- Ajax request here -->
+                        </select>
+                    </div>
+                     <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+
+
+        </div>
+
+        </div>
+
+
+        
+    </header>
+
+
+
+    <!-- About -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Explore the scenery of New Zealand!</h2>
+                    <p class="lead">FlyHigh features spectacle places of New Zealand. Photography courtesy of <a target="_blank" href="http://DarkSociety.com/">Dark Society</a>.</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="services bg-primary">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h2>Our Services</h2>
+                    <hr class="small">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-plane fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>Small Plane</strong>
+                                </h4>
+                                <p>Explore NZ by yourself.</p>
+                                <a href="#" class="btn btn-light">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-fighter-jet fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>Fighter Jet</strong>
+                                </h4>
+                                <p>Explore NZ with you Family.</p>
+                                <a href="#" class="btn btn-light">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-space-shuttle fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>Space Shuttle</strong>
+                                </h4>
+                                <p>Explore NZ with Friends.</p>
+                                <a href="#" class="btn btn-light">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wheelchair fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>WheelChair</strong>
+                                </h4>
+                                <p>Explore NZ after plane accident.</p>
+                                <a href="#" class="btn btn-light">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <!-- Callout -->
+    <aside>
+        <div class="container">
+          <hr>
+            <div class="event-card" style="display: none; position: absolute; width: 700px; height: 310px; background: white; z-index: 100; left: 50%; margin-left: -300px; box-shadow: 0 0 3px grey;">
+            <div class="event-close" style="position: absolute; z-index: 1; cursor: pointer; right: 10px; top: 10px;">
+                <span class="glyphicon glyphicon-remove-circle" style="font-size: 20px;"></span>
+            </div>
+                <div class="col-lg-6">
+                    <h3 class="text-muted event-card-type"></h3>
+                    <hr>
+                    <h4 class="event-card-club"></h4>
+                    <p class="event-card-description"></p>
+                    
+                    <h4 class="event-card-date"></h4>
+                    <h4 class="event-card-time"></h4>
+                    <button type="submit" class="btn btn-default join-event-button" style="display: none;">Book for this Event!</button>
+                    <button type="submit" class="btn btn-default signup-before" style="display: none;">Login and book this Event!</button>
+                </div>
+                <div class="col-lg-6 event-cart" style="display: none;">
+                    <h3 class="text-muted">Event Cart</h3>
+                    <hr>
+                    <button type="submit" class="btn btn-default confirm-event-button" data-event-id="">Pay Checkout!</button>
+                </div>
+                <div class="col-lg-6 already-applied-event" style="display: none;">
+                    <h3 class="text-muted">Event</h3>
+                    <hr>
+                    <p>You successfully applied for this event!</p>
+                </div>
+            </div>
+        </div>
+        <div id="calendar"></div>
+    </aside>
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h2>Events</h2>
+                    <hr class="small">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="portfolio-item">
+                                <a href="#">
+                                    <img class="img-portfolio img-responsive" src="images/portfolio-1.jpg">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-item">
+                                <a href="#">
+                                    <img class="img-portfolio img-responsive" src="images/portfolio-2.jpg">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-item">
+                                <a href="#">
+                                    <img class="img-portfolio img-responsive" src="images/portfolio-3.jpg">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-item">
+                                <a href="#">
+                                    <img class="img-portfolio img-responsive" src="images/portfolio-4.jpg">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row (nested) -->
+                    <a href="#" class="btn btn-dark">View More Items</a>
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <!-- Call to Action -->
+    <aside class="call-to-action bg-primary">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h3>The buttons below are impossible to resist.</h3>
+                    <a href="#" class="btn btn-lg btn-light">Click Me!</a>
+                    <a href="#" class="btn btn-lg btn-dark">Look at Me!</a>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Map -->
+    <section id="contact" class="map">
+       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3192.876579596066!2d174.763113!3d-36.84543179999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d47fa1261418d%3A0xb72b284a26b2b646!2sNtec+-+National+Tertiary+Education+Consortium!5e0!3m2!1sen!2snz!4v1438827181064" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+        <br />        
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h4><strong>BlairLines</strong>
+                    </h4>
+                    <p>20 Hobson Street Ntec Tower<br>Auckland CBD, NZ 1010</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-phone fa-fw"></i> (64) 022-1876594</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">DarkSociety@gmail.com</a>
+                        </li>
+                    </ul>
+                    <br>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
+                        </li>
+                    </ul>
+                    <hr class="small">
+                    <p class="text-muted">Copyright &copy; BlairLines.co.nz 2015</p>
+                </div>              
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Scrolls to the selected menu item on the page
+    $(function() {
+        $('a[href*=#]:not([href=#])').click(function() {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                }
+            }
+        });
+    });
+    </script>
+
+<!--     <%- body %>
+ -->
 
 
     <!--
