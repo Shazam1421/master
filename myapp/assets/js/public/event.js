@@ -24,7 +24,7 @@ function renderCalendar(){
     var y = date.getFullYear();
     
     $.ajax({
-    	url: "event/calendar/",
+    	url: "event/calendar",
     	dataType: "JSON",
     	success: function(data){
 
@@ -34,11 +34,18 @@ function renderCalendar(){
 
     			var formatDateTime = data[i].date.split("T");
     			var formatDate = formatDateTime[0].split("-");
+			var timeStartSplit = data[i].timeStart.split(" ");
+			var timeStarts = timeStartSplit[0].split(":");
+			var timeEndSplit = data[i].timeEnd.split(" ");
+			var timeEnds = timeEndSplit[0].split(":");
+			var desc = data[i].eventType.title + "\r\n" +  data[i].clubs[0].name;
 
     			eventArr.push({ 
     				id: data[i].id, 
-    				title: data[i].eventType.title, 
-    				start: new Date(formatDate[0],formatDate[1]-1,formatDate[2]) 
+    				title: desc, 
+    				start: new Date(formatDate[0],formatDate[1]-1,formatDate[2],timeStarts[0],timeStarts[1]),
+				end: new Date(formatDate[0],formatDate[1]-1,formatDate[2],timeEnds[0],timeEnds[1]),
+				allDay: false
     			});
 
     		}
@@ -54,6 +61,18 @@ function renderCalendar(){
 		        },
 		        editable: true,
 		        events: eventArr,
+			   
+    // EventColor
+   eventAfterRender: function (event, element, view) {
+        var NewDate = new Date();
+        if (event.start < NewDate && event.end > NewDate) {            
+            element.css('background-color', '#77dd77');//Present or In progress #77DD77
+        } else if (event.start < NewDate && event.end < NewDate) {
+            element.css('background-color', '#7777dd');//Past or Completed #AEC6CF  #dd7777  #7777dd
+        } else if (event.start > NewDate && event.end > NewDate) {
+            element.css('background-color', '#dd77dd');//Future or not Started #FFB347
+        }
+    },
 			    eventClick: function(event) {
 
 			    	$(".join-event-button, .event-cart, .already-applied-event, .signup-before").hide();
@@ -77,7 +96,7 @@ function renderCalendar(){
 			    			if(userObject.user){
 
 			    				for(pass in data.passengers){
-			    					if(pass.id == userObject.user.PassengerId){ alreadyAppliedEvent = true; console.log("-"); console.log(userObject); console.log("-"); }
+			    					if(pass.id == userObject.user.PassengerId){ alreadyAppliedEvent = true; console.log(1); }
 			    				}
 
 			    				if(userObject.user.userType==1 && !alreadyAppliedEvent ){ $(".join-event-button").show(); } 
@@ -170,7 +189,7 @@ $(document).ready(function(){
 					$(self).html("<p>Event successfully created!</p>");
 
 					renderCalendar();
-					setTimeout(function(){ $("a[href=#services]").click(); },1500);
+					setTimeout(function(){ $("a[href=#portfolio]").click(); },1500);
 				}
 
 			}
