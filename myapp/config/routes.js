@@ -41,6 +41,9 @@ module.exports.routes = {
     action: 'login'
   },
 
+  // 'GET /default': { view: 'default'},
+  // 'GET /signup': { view: 'signup' },
+
   'GET /admin':{
     view: 'admin'
   }

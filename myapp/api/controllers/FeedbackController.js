@@ -6,6 +6,18 @@
  */
 
 module.exports = {
+
+	'index': function(req,res,next){
+		Feedback.find().exec(function findEvent(err,feedback){ 
+			if(err){ 
+				res.json(err);
+			}
+
+			res.json(feedback);
+
+		});
+
+	}
 	
 };
 

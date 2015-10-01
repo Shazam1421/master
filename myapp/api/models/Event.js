@@ -9,7 +9,8 @@ module.exports = {
 
   attributes: {
   	date: 'datetime',
-  	time: 'string',
+  	timeStart : 'string',
+        timeEnd : 'string',
   	description: 'string',
   	status: 'integer',
 

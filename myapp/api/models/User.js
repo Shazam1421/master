@@ -23,7 +23,15 @@ module.exports = {
 
   	userType:{
   		type: 'integer'
-  	}
+  	},
+
+    validationMessages: { //hand for i18n & l10n
+        email: {
+          required: 'Email is required',
+          unique: 'Email address is already taken'
+        }
+    }
+
 
   }
 };

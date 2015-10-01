@@ -9,24 +9,23 @@ module.exports = {
 
   attributes: {
   	name: 'string',
-  	contactPerson: 'string',
-  	phone: 'string',
-  	location: 'string',
-  	latLng: 'array',
-  	workingHours: 'string',
-  	description: 'string',
-  	pilots: {
-  		collection: 'pilot',
-  		via: 'clubs'
-  	},
-  	events: {
-  		collection: 'event',
-  		via: 'clubs'
-  	},
-  	user:{
-  		model: 'user'
-  	}
-
+    contactPerson: 'string',
+    phone: 'string',
+    location: 'string',
+    latLng: 'array',
+    workingHours: 'string',
+    description: 'string',
+    pilots: {
+      collection: 'pilot',
+      via: 'clubs'
+    },
+    events:{
+      collection: 'event',
+      via: 'clubs'
+    },
+    user: {
+      model: 'user'
+    }
   }
 };
 

@@ -6,6 +6,18 @@
  */
 
 module.exports = {
+
+	'index': function(req,res,next){
+		Subscription.find().exec(function findEvent(err,subscription){ 
+			if(err){ 
+				res.json(err);
+			}
+
+			res.json(subscription);
+
+		});
+
+	}
 	
 };
 
